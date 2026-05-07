@@ -4,10 +4,6 @@ from app.core.security import hash_password, verify_password
 
 
 def create_user(db: Session, user_data):
-    # Debug BEFORE hashing
-    print("PASSWORD:", user_data.password)
-    print("LENGTH:", len(user_data.password))
-
     existing_user = db.query(User).filter(User.email == user_data.email).first()
 
     if existing_user:
@@ -15,7 +11,10 @@ def create_user(db: Session, user_data):
 
     new_user = User(
         email=user_data.email,
-        hashed_password=hash_password(user_data.password)
+        hashed_password=hash_password(user_data.password),
+        first_name=user_data.first_name,
+        last_name=user_data.last_name,
+        phone=user_data.phone
     )
 
     db.add(new_user)

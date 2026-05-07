@@ -1,19 +1,29 @@
 import { useNavigate } from "react-router-dom";
 
 type Props = {
+  id: number;
   name: string;
-  slug: string;
+  image_url?: string;
 };
 
-const CategoryCard = ({ name, slug }: Props) => {
+const CategoryCard = ({id, name, image_url}: Props) => {
   const navigate = useNavigate();
 
   return (
     <div
-      onClick={() => navigate(`/products?category=${slug}`)}
-      className="p-4 border border-solid border-1 rounded-md cursor-pointer text-center duration-300 ease-in-out bg-lime-100 hover:bg-lime-200"
+      onClick={() => navigate(`/categories/${id}`)}
+      className="relative block group rounded-xl overflow-hidden cursor-pointer bg-lime-50 shadow-md hover:shadow-lg transition duration-300"
     >
-      <h3 className="text-green-800">{name}</h3>
+        <div className="relative block w-full h-96 overflow-hidden">
+          <img
+            src={
+              `http://127.0.0.1:8000${image_url}` ||
+              "https://via.placeholder.com/300"
+            }
+            alt={name}
+            className="absolute top-0 left-0 w-full h-full group-hover:scale-105 transition duration-300"
+          />          
+        </div>
     </div>
   );
 };

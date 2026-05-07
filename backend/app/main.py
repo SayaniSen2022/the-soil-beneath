@@ -1,16 +1,25 @@
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
+
 from sqlalchemy.orm import Session
 from sqlalchemy import text
-from app.db.session import get_db
 
+from app.db.session import get_db
 from app.db.session import Base, engine
+
+# routers
+from app.api.v1 import auth
+from app.api.v1 import products
+from app.api.v1.testimonials import router as testimonial_router
+
+# models
 from app.models import user
+from app.models import product
+from app.models import category
+from app.models import testimonials
 
 Base.metadata.create_all(bind=engine)
-
-# Future imports (you'll create these next)
-from app.api.v1 import auth
 
 app = FastAPI(
     title="The Soil Beneath API",
@@ -18,10 +27,11 @@ app = FastAPI(
     description="Backend API for The Soil Beneath ecommerce platform"
 )
 
-# CORS (important for React frontend)
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
 origins = [
-    "http://localhost:5173",  # Vite default
-    "http://localhost:3000",  # CRA fallback
+    "http://localhost:5173",
+    "http://localhost:3000",
 ]
 
 app.add_middleware(
@@ -32,7 +42,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Health Check
 @app.get("/")
 def root():
     return {"message": "The Soil Beneath API is running"}
@@ -41,10 +50,6 @@ def root():
 def health_check():
     return {"status": "ok"}
 
-# 🔗 Include Routers (we’ll add these soon)
-
-app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
-
 @app.get("/test-db")
 def test_db(db: Session = Depends(get_db)):
     try:
@@ -52,3 +57,10 @@ def test_db(db: Session = Depends(get_db)):
         return {"message": "DB connected successfully ✅"}
     except Exception as e:
         return {"error": str(e)}
+
+# routers
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
+
+app.include_router(products.router, prefix="/api/v1")
+
+app.include_router(testimonial_router)

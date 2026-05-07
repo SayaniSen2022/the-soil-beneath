@@ -1,11 +1,12 @@
 from fastapi import APIRouter, HTTPException, Depends
 from sqlalchemy.orm import Session
-from app.db.session import get_db
+from app.db.session import get_db, SessionLocal
 from app.schemas.user import UserCreate, UserLogin, UserResponse
 from app.services.user_service import create_user, authenticate_user
 from app.core.security import create_access_token, SECRET_KEY, ALGORITHM
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from jose import JWTError, jwt
+from app.models.user import User
 
 
 
@@ -57,5 +58,15 @@ def get_current_user(token: str = Depends(oauth2_scheme)):
 
 
 @router.get("/me")
-def get_me(user_id: str = Depends(get_current_user)):
-    return {"user_id": user_id}
+def get_me(user_id: str = Depends(get_current_user), db: Session = Depends(get_db)):    
+    user = db.query(User).filter(User.id == int(user_id)).first()
+
+    if not user:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    return {
+        "id": user.id,
+        "first_name": user.first_name,
+        "last_name": user.last_name,
+        "email": user.email
+        }
