@@ -19,8 +19,17 @@ def create_product(product: ProductCreate, db: Session = Depends(get_db)):
 
 
 @router.get("/", response_model=List[ProductResponse])
-def get_products(db: Session = Depends(get_db)):
-    return db.query(Product).all()
+def get_products(
+    search: str | None = None,
+    db: Session = Depends(get_db)
+):
+    query = db.query(Product)
+
+    if search:
+        query = query.filter(
+            Product.name.ilike(f"%{search}%")
+        )
+    return query.all()
 
 @router.get("/featured")
 def get_featured_products(db: Session = Depends(get_db)):
@@ -33,3 +42,9 @@ def get_featured_products(db: Session = Depends(get_db)):
 @router.get("/categories")
 def get_categories(db: Session = Depends(get_db)):
     return db.query(Category).all()
+
+@router.get("/{id}", response_model=ProductResponse)
+def get_product_details(id: int, db: Session = Depends(get_db)):
+    return(
+        db.query(Product).filter(Product.id == id).first()
+    )

@@ -3,6 +3,8 @@ import { useCart } from "../../context/CartContext"
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import SearchBar from "../search/SearchBar";
+import { FaUser, FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -16,25 +18,25 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-baseline justify-between p-2 fixed top-0 left-0 w-full z-20 bg-stone-100">
-      <div>
+    <div className="flex items-center justify-around p-3 fixed top-0 left-0 w-full z-20 bg-stone-100">
+      <div className="pb-2">
         <Link to="/">
-          <p className="text-3xl font-bold text-amber-900">
+          <p className="text-2xl md:text-3xl font-bold text-amber-900">
             The Soil Beneath
           </p>
         </Link>
-        <p className="text-md text-lime-700">Rooted in nature. Delivered to you.</p>
+        <p className="text-sm md:text-md text-lime-700">Rooted in nature. Delivered to you.</p>
       </div>
 
-
+      <SearchBar/>
       
-      <div>
+      <div className="hidden md:flex items-center gap-10">
         <span className="relative" onClick={() => setOpen(prev => !prev)}>
           <span>
             {user ? (
               <Link to="/" className="text-xl px-2 text-amber-600" >{user.first_name}'s Account</Link>
             ) : (
-              <Link className="text-xl px-2 text-amber-600 font-medium" to="/login">My Account</Link>
+              <Link className="text-xl px-2 text-amber-600 font-medium" to="/login"><FaUser /></Link>
             )}
           </span>
           <span>
@@ -54,8 +56,13 @@ const Navbar = () => {
           
         </span>
         
-        <Link className="text-xl px-2 text-amber-600 font-medium" to="/cart">
-          Cart <span className="text-red-600">({getCartCount()})</span>
+        <Link to="/cart">
+          <div className="relative flex items-center text-xl px-2 text-amber-600 font-medium" >
+            <div><FaShoppingCart /></div>
+           {getCartCount() > 0 && (
+              <span className="absolute -top-2 -right-2 bg-red-500 
+              text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">{getCartCount()}</span> )}
+          </div>
         </Link>
       </div>
     </div>

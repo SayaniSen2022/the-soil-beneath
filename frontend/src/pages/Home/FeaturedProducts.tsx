@@ -33,6 +33,7 @@ const FeaturedProducts = () => {
         {products.map((product) => (
           <FeaturedProductCard
             key={product.id}
+            id={product.id}
             name={product.name}
             image_url={product.image_url}
             price={product.price}
