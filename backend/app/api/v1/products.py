@@ -9,7 +9,7 @@ from typing import List
 router = APIRouter(prefix="/products", tags=["Products"])
 
 
-@router.post("/", response_model=ProductResponse)
+@router.post("", response_model=ProductResponse)
 def create_product(product: ProductCreate, db: Session = Depends(get_db)):
     new_product = Product(**product.dict())
     db.add(new_product)
@@ -18,7 +18,7 @@ def create_product(product: ProductCreate, db: Session = Depends(get_db)):
     return new_product
 
 
-@router.get("/", response_model=List[ProductResponse])
+@router.get("", response_model=List[ProductResponse])
 def get_products(
     search: str | None = None,
     db: Session = Depends(get_db)
