@@ -14,10 +14,7 @@ router = APIRouter(
 )
 
 
-@router.get(
-    "/",
-    response_model=list[TestimonialResponse]
-)
+@router.get("", response_model=list[TestimonialResponse])
 def get_testimonials(
     db: Session = Depends(get_db)
 ):
