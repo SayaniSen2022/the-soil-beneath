@@ -36,12 +36,11 @@ const Testimonials = () => {
         {testimonials.map((testimony) => (
           <TestimonialCard
             key={testimony.id}
-            id={testimony.id}
             customer_name={testimony.customer_name}
             location={testimony.location}
             remarks={testimony.remarks}
             rating={testimony.rating}
-            date_posted={testimony.date_posted}
+            date_posted={testimony.date_posted} 
           />          
         ))}
       </div>

@@ -1,7 +1,6 @@
 import {FaStar, FaRegStar} from "react-icons/fa";
 
 type Props = {
-  id: number;
   customer_name: string;
   location: string;
   remarks: string;
@@ -9,7 +8,7 @@ type Props = {
   date_posted: string;
 };
 
-const TestimonialCard = ({id, customer_name, location, remarks, rating, date_posted}: Props) => {
+const TestimonialCard = ({customer_name, location, remarks, rating, date_posted}: Props) => {
 
   return (
     <div
