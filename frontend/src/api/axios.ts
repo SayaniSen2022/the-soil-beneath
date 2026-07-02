@@ -4,7 +4,7 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
 });
 
-console.log(import.meta.env.VITE_API_BASE_URL);
+// console.log(import.meta.env.VITE_API_BASE_URL);
 
 // attach token automatically
 api.interceptors.request.use((config) => {
