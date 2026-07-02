@@ -1,5 +1,7 @@
 import { useNavigate } from "react-router-dom";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 type Props = {
   id: number;
   name: string;
@@ -16,8 +18,8 @@ const CategoryCard = ({id, name, image_url}: Props) => {
     >
         <div className="relative block w-full h-96 overflow-hidden">
           <img
-            src={
-              `http://127.0.0.1:8000${image_url}` ||
+            src={ image_url ? 
+              `${API_BASE_URL}${image_url}` :
               "https://via.placeholder.com/300"
             }
             alt={name}
