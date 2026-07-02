@@ -7,6 +7,10 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
+print("=" * 80)
+print("DATABASE_URL:", repr(DATABASE_URL))
+print("=" * 80)
+
 engine = create_engine(DATABASE_URL, pool_pre_ping=True) # to keep long-lived db connections healthy
 
 SessionLocal = sessionmaker(
