@@ -13,7 +13,7 @@ const FeaturedProductCard = ({ id, name, image_url, price }: Props) => {
 
 return (
   <div
-    onClick={() => navigate(`/product/${id}`)}
+    onClick={() => navigate(`/products/${id}`)}
     className="relative block group rounded-xl overflow-hidden cursor-pointer bg-lime-50 shadow-md hover:shadow-lg transition duration-300"
   >
     {/* Image */}
