@@ -4,7 +4,7 @@ const Hero = () => {
   return (
     <div className='relative'>
       <img 
-        src="../../public/images/Plant-banner.webp" 
+        src="/images/Plant-banner.webp" 
         alt="hero-banner" 
         className='w-full h-full object-cover'
       />
