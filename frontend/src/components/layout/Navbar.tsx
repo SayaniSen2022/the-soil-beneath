@@ -18,14 +18,14 @@ const Navbar = () => {
   };
 
   return (
-    <div className="flex items-center justify-around p-3 fixed top-0 left-0 w-full z-20 bg-stone-100">
+    <div className="flex flex-col md:flex-row lg:flex-row items-center justify-around p-5  md:p-3 lg:p-3 fixed top-0 left-0 w-full z-20 bg-stone-100">
       <div className="pb-2">
         <Link to="/">
-          <p className="text-2xl md:text-3xl font-bold text-amber-900">
+          <p className="text-4xl md:text-2xl lg:text-2xl md:text-3xl font-bold text-amber-900">
             The Soil Beneath
           </p>
         </Link>
-        <p className="text-sm md:text-md text-lime-700">Rooted in nature. Delivered to you.</p>
+        <p className="text-center md:text-left lg:text-left text-sm md:text-md text-lime-700">Rooted in nature. Delivered to you.</p>
       </div>
 
       <SearchBar/>
