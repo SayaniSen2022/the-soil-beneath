@@ -47,7 +47,7 @@ const LoginForm = () => {
   };
 
   return (
-    <div className="min-h-[80vh] flex items-center justify-center px-4 mt-6">
+    <div className="flex items-center justify-center px-4 min-h-full">
       <div className="w-full max-w-md bg-white shadow-md rounded-2xl p-8 border">
         
         <h2 className="text-3xl font-semibold text-center mb-6">

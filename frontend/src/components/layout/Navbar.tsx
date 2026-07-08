@@ -1,71 +1,13 @@
-import { Link } from "react-router-dom"
-import { useCart } from "../../context/CartContext"
-import { useAuth } from "../../context/AuthContext";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import SearchBar from "../search/SearchBar";
-import { FaUser, FaShoppingCart } from "react-icons/fa";
+import DesktopNavbar from "./DesktopNavbar"
+import MobileHeader from "./MobileHeader"
+
 
 const Navbar = () => {
-  const { user, logout } = useAuth();
-  const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const {getCartCount} = useCart();
- 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
   return (
-    <div className="flex flex-col md:flex-row lg:flex-row items-center justify-around p-5  md:p-3 lg:p-3 fixed top-0 left-0 w-full z-20 bg-stone-100">
-      <div className="pb-2">
-        <Link to="/">
-          <p className="text-4xl md:text-2xl lg:text-2xl md:text-3xl font-bold text-amber-900">
-            The Soil Beneath
-          </p>
-        </Link>
-        <p className="text-center md:text-left lg:text-left text-sm md:text-md text-lime-700">Rooted in nature. Delivered to you.</p>
-      </div>
-
-      <SearchBar/>
-      
-      <div className="hidden md:flex items-center gap-10">
-        <span className="relative" onClick={() => setOpen(prev => !prev)}>
-          <span>
-            {user ? (
-              <Link to="/" className="text-xl px-2 text-amber-600" >{user.first_name}'s Account</Link>
-            ) : (
-              <Link className="text-xl px-2 text-amber-600 font-medium" to="/login"><FaUser /></Link>
-            )}
-          </span>
-          <span>
-            {open && user && (
-              <div className="absolute right-0 mt-1 w-40 bg-white border rounded-md shadow-md">
-                
-                <button
-                  onClick={handleLogout}
-                  className="w-full text-left px-4 py-2 hover:bg-gray-100 font-medium"
-                >
-                  Logout
-                </button>
-
-              </div>
-            )}
-          </span>
-          
-        </span>
-        
-        <Link to="/cart">
-          <div className="relative flex items-center text-xl px-2 text-amber-600 font-medium" >
-            <div><FaShoppingCart /></div>
-           {getCartCount() > 0 && (
-              <span className="absolute -top-2 -right-2 bg-red-500 
-              text-white text-xs font-semibold rounded-full h-5 w-5 flex items-center justify-center">{getCartCount()}</span> )}
-          </div>
-        </Link>
-      </div>
-    </div>
+    <>
+      <DesktopNavbar/>
+      <MobileHeader/>
+    </>
   )
 }
 

@@ -29,7 +29,7 @@ const FeaturedProducts = () => {
     <section className="p-6 mt-6">
       <h2 className="pb-6 text-3xl text-center">Featured Products</h2>
 
-      <div className="grid grid grid-cols-1 min-[520px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4">
+      <div className="grid grid grid-cols-1 min-[520px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
           <FeaturedProductCard
             key={product.id}
