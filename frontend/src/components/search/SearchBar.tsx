@@ -14,7 +14,7 @@ const SearchBar = () => {
   }
 
   return (
-    <form action="/search" className="inline-block relative w-3/5 md:w-1/2" onSubmit={handleSubmit}>
+    <form action="/search" className="inline-block relative w-5/6 min-[650px]:w-3/5 md:w-1/2" onSubmit={handleSubmit}>
       <div className='flex justify-between items-center border border-amber-600 rounded-3xl bg-white w-full'>
       <div className="nav-left inline-block relative w-full">
         <label htmlFor="searchbar" style={{display: "none"}}>Search</label>

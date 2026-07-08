@@ -15,7 +15,11 @@ const MobileBottomNav = () => {
 
         <NavLink
           to="/"
-          className="flex flex-col items-center justify-center text-gray-700 hover:text-green-700"
+          className={({ isActive }) =>
+              `flex flex-col items-center justify-center ${
+                  isActive ? "text-gray-500" : "text-gray-700"
+              }`
+          }
         >
           <FaHome size={20} />
           <span className="text-xs mt-1">Home</span>
@@ -23,7 +27,11 @@ const MobileBottomNav = () => {
 
         <NavLink
           to="/products"
-          className="flex flex-col items-center justify-center text-gray-700 hover:text-green-700"
+          className={({ isActive }) =>
+              `flex flex-col items-center justify-center ${
+                  isActive ? "text-gray-500" : "text-gray-700"
+              }`
+          }
         >
           <FaLeaf size={20} />
           <span className="text-xs mt-1">Shop</span>
@@ -33,7 +41,7 @@ const MobileBottomNav = () => {
           to="/cart"
           className={({ isActive }) =>
               `flex flex-col items-center justify-center ${
-                  isActive ? "text-green-700" : "text-gray-500"
+                  isActive ? "text-gray-500" : "text-gray-700"
               }`
           }
         >
@@ -53,7 +61,11 @@ const MobileBottomNav = () => {
 
         <NavLink
           to="/login"
-          className="flex flex-col items-center justify-center text-gray-700 hover:text-green-700"
+          className={({ isActive }) =>
+              `flex flex-col items-center justify-center ${
+                  isActive ? "text-gray-500" : "text-gray-700"
+              }`
+          }
         >
           <FaUser size={20} />
           <span className="text-xs mt-1">Account</span>
