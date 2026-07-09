@@ -13,7 +13,7 @@ const CategoryCard = ({id, name, image_url}: Props) => {
 
   return (
     <div
-      onClick={() => navigate(`/categories/${id}`)}
+      onClick={() => navigate(`/products?category=${id}`)}
       className="relative block group rounded-xl overflow-hidden cursor-pointer bg-lime-50 shadow-md hover:shadow-lg transition duration-300"
     >
         <div className="relative block w-full h-96 overflow-hidden">

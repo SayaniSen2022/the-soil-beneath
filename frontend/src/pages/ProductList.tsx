@@ -3,6 +3,7 @@ import { useSearchParams } from "react-router-dom"
 import api from "../api/axios";
 import ProductCard from "../components/product/ProductCard"
 import type { Product } from "../types/product";
+import Breadcrumbs from "../components/ui/Breadcrumbs";
 
 const ProductList = () => {
   const [products, setProducts] = useState<Product[]>([]);
@@ -34,6 +35,26 @@ const ProductList = () => {
 
   return (
     <div className="max-w-7xl mx-auto pt-[9rem] md:pt-28 px-6">
+      <Breadcrumbs
+        items={[
+          {
+            label: "Home",
+            href: "/",
+          },
+
+          ...(category && products.length > 0
+              ? [{
+                  label: products[0].category.name,
+              }]
+              : []),
+
+          ...(search
+              ? [{
+                  label: `Search`,
+              }]
+              : [])
+        ]}
+      />
       <h1 className="text-3xl font-semibold mb-8">
         {search? `Search Results for ${search}` : category ? categoryName : "All Plants"}
       </h1>
