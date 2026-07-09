@@ -1,4 +1,5 @@
 import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   id: number;
@@ -9,9 +10,11 @@ type Props = {
 
 const ProductCard = ({ id, name, price, image_url }: Props) => {
   const { addToCart } = useCart();
+  const navigate = useNavigate();
 
   return (
-    <div className="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden cursor-pointer">
+    <div onClick={() => navigate(`/product/${id}`)} 
+         className="bg-white rounded-lg shadow hover:shadow-lg overflow-hidden cursor-pointer">
       <div className="h-72 overflow-hidden">
         <img src={image_url} alt={name} className="w-full h-full object-cover" />
       </div>

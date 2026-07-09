@@ -21,9 +21,13 @@ def create_product(product: ProductCreate, db: Session = Depends(get_db)):
 @router.get("", response_model=List[ProductResponse])
 def get_products(
     search: str | None = None,
+    category: int | None = None,
     db: Session = Depends(get_db)
 ):
     query = db.query(Product)
+
+    if category:
+        query = query.filter(Product.category_id == category)
 
     if search:
         query = query.filter(
